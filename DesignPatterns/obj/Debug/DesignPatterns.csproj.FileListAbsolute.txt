@@ -1,0 +1,17 @@
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\DesignPatterns.exe.config
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\DesignPatterns.exe
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\DesignPatterns.pdb
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.csprojResolveAssemblyReference.cache
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.AnaMenu.resources
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.Properties.Resources.resources
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.csproj.GenerateResource.Cache
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.exe
+c:\users\burcak\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.pdb
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\EntityFramework.dll
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\EntityFramework.xml
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.SalonMenu.resources
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.TakimMenu.resources
+C:\Users\BURCAK\documents\visual studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.HakemMenu.resources
+C:\Users\BURCAK\Documents\Visual Studio 2015\Projects\DesignPatterns\DesignPatterns\obj\Debug\DesignPatterns.MacIslemleri.resources

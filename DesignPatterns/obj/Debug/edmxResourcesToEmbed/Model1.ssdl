@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="spordbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="hakem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adi" Type="varchar" MaxLength="50" />
+    <Property Name="soyadi" Type="varchar" MaxLength="50" />
+    <Property Name="gorev" Type="varchar" MaxLength="50" />
+    <Property Name="sehir" Type="varchar" MaxLength="50" />
+    <Property Name="klasmani" Type="varchar" MaxLength="50" />
+    <Property Name="diger" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="maclar">
+    <Key>
+      <PropertyRef Name="macID" />
+    </Key>
+    <Property Name="macID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="homeID" Type="int" />
+    <Property Name="awayID" Type="int" />
+    <Property Name="hafta" Type="int" />
+    <Property Name="salonID" Type="int" />
+    <Property Name="basHakemID" Type="int" />
+    <Property Name="yHakemID" Type="int" />
+    <Property Name="iyHakemID" Type="int" />
+    <Property Name="ligAdi" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="salonlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ligi" Type="nvarchar" MaxLength="50" />
+    <Property Name="diger" Type="nvarchar" MaxLength="50" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="takimlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+    <Property Name="lig" Type="nvarchar" MaxLength="50" />
+    <Property Name="diger" Type="nvarchar" MaxLength="50" />
+    <Property Name="salonID" Type="int" />
+  </EntityType>
+  <Association Name="FK_maclar_hakem">
+    <End Role="hakem" Type="Self.hakem" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="maclar" Type="Self.maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hakem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="basHakemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_salonlar">
+    <End Role="salonlar" Type="Self.salonlar" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="maclar" Type="Self.maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salonlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="salonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_takimlar">
+    <End Role="takimlar" Type="Self.takimlar" Multiplicity="0..1" />
+    <End Role="maclar" Type="Self.maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="takimlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="homeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_takimlar1">
+    <End Role="takimlar" Type="Self.takimlar" Multiplicity="0..1" />
+    <End Role="maclar" Type="Self.maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="takimlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="awayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_takimlar_salonlar">
+    <End Role="salonlar" Type="Self.salonlar" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="takimlar" Type="Self.takimlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salonlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="takimlar">
+        <PropertyRef Name="salonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="spordbModelStoreContainer">
+    <EntitySet Name="hakem" EntityType="Self.hakem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="maclar" EntityType="Self.maclar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salonlar" EntityType="Self.salonlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="takimlar" EntityType="Self.takimlar" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_maclar_hakem" Association="Self.FK_maclar_hakem">
+      <End Role="hakem" EntitySet="hakem" />
+      <End Role="maclar" EntitySet="maclar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_salonlar" Association="Self.FK_maclar_salonlar">
+      <End Role="salonlar" EntitySet="salonlar" />
+      <End Role="maclar" EntitySet="maclar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_takimlar" Association="Self.FK_maclar_takimlar">
+      <End Role="takimlar" EntitySet="takimlar" />
+      <End Role="maclar" EntitySet="maclar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_takimlar1" Association="Self.FK_maclar_takimlar1">
+      <End Role="takimlar" EntitySet="takimlar" />
+      <End Role="maclar" EntitySet="maclar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_takimlar_salonlar" Association="Self.FK_takimlar_salonlar">
+      <End Role="salonlar" EntitySet="salonlar" />
+      <End Role="takimlar" EntitySet="takimlar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

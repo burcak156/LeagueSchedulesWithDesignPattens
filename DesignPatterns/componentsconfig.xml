@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<components>
+  <textbox type="first">
+    <textcolor>Yellow</textcolor>
+    <bgcolor>Black</bgcolor>
+  </textbox>
+  <textbox type ="second">
+    <textcolor>Red</textcolor>
+    <bgcolor>Black</bgcolor>
+  </textbox>
+  <button type ="first">
+    <textcolor>Red</textcolor>
+    <bgcolor>Yellow</bgcolor>
+  </button>
+  <button type ="second">
+    <textcolor>Yellow</textcolor>
+    <bgcolor>Green</bgcolor>
+  </button>
+  <label type ="first">
+    <textcolor>Black</textcolor>
+  </label>
+  <label type ="second">
+    <textcolor>Blue</textcolor>
+  </label>
+  <label type="third">
+    <textcolor>Purple</textcolor>
+  </label>
+  <combobox type ="first">
+    <bgcolor>Red</bgcolor>
+    <fgcolor>Write</fgcolor>
+  </combobox>
+  <tabpage type ="first">
+    <bgcolor>Purple</bgcolor>
+  </tabpage>
+  <tabpage type="second">
+    <bgcolor>Green</bgcolor>
+  </tabpage>
+  <datagrid type ="first">
+    <bgcolor>Brown</bgcolor>
+    <textcolor>Green</textcolor>
+  </datagrid>
+</components>

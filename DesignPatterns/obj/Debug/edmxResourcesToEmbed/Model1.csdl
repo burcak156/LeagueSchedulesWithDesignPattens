@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="spordbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="hakem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gorev" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="klasmani" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="diger" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="maclars" Relationship="spordbModel.FK_maclar_hakem" FromRole="hakem" ToRole="maclar" />
+  </EntityType>
+  <EntityType Name="salonlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ligi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="diger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="takimlar" Relationship="Self.FK_takimlar_salonlar" FromRole="salonlar" ToRole="takimlar" />
+    <NavigationProperty Name="maclars" Relationship="spordbModel.FK_maclar_salonlar" FromRole="salonlar" ToRole="maclar" />
+  </EntityType>
+  <EntityType Name="takimlar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="lig" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="diger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="salonID" Type="Int32" />
+    <NavigationProperty Name="salonlar" Relationship="Self.FK_takimlar_salonlar" FromRole="takimlar" ToRole="salonlar" />
+    <NavigationProperty Name="maclars" Relationship="spordbModel.FK_maclar_takimlar" FromRole="takimlar" ToRole="maclar" />
+    <NavigationProperty Name="maclars1" Relationship="spordbModel.FK_maclar_takimlar1" FromRole="takimlar" ToRole="maclar" />
+  </EntityType>
+  <Association Name="FK_takimlar_salonlar">
+    <End Role="salonlar" Type="Self.salonlar" Multiplicity="0..1" />
+    <End Role="takimlar" Type="Self.takimlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salonlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="takimlar">
+        <PropertyRef Name="salonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="spordbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="hakem" EntityType="Self.hakem" />
+    <EntitySet Name="salonlar" EntityType="Self.salonlar" />
+    <EntitySet Name="takimlar" EntityType="Self.takimlar" />
+    <AssociationSet Name="FK_takimlar_salonlar" Association="Self.FK_takimlar_salonlar">
+      <End Role="salonlar" EntitySet="salonlar" />
+      <End Role="takimlar" EntitySet="takimlar" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(spordbModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(spordbModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="maclars" EntityType="spordbModel.maclar" />
+    <AssociationSet Name="FK_maclar_salonlar" Association="spordbModel.FK_maclar_salonlar">
+      <End Role="salonlar" EntitySet="salonlar" />
+      <End Role="maclar" EntitySet="maclars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_takimlar" Association="spordbModel.FK_maclar_takimlar">
+      <End Role="takimlar" EntitySet="takimlar" />
+      <End Role="maclar" EntitySet="maclars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_takimlar1" Association="spordbModel.FK_maclar_takimlar1">
+      <End Role="takimlar" EntitySet="takimlar" />
+      <End Role="maclar" EntitySet="maclars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_maclar_hakem" Association="spordbModel.FK_maclar_hakem">
+      <End Role="hakem" EntitySet="hakem" />
+      <End Role="maclar" EntitySet="maclars" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="maclar">
+    <Key>
+      <PropertyRef Name="macID" />
+    </Key>
+    <Property Name="macID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="homeID" Type="Int32" />
+    <Property Name="awayID" Type="Int32" />
+    <Property Name="hafta" Type="Int32" />
+    <Property Name="salonID" Type="Int32" />
+    <Property Name="basHakemID" Type="Int32" />
+    <Property Name="yHakemID" Type="Int32" />
+    <Property Name="iyHakemID" Type="Int32" />
+    <Property Name="ligAdi" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="salonlar" Relationship="spordbModel.FK_maclar_salonlar" FromRole="maclar" ToRole="salonlar" />
+    <NavigationProperty Name="takimlar" Relationship="spordbModel.FK_maclar_takimlar" FromRole="maclar" ToRole="takimlar" />
+    <NavigationProperty Name="takimlar1" Relationship="spordbModel.FK_maclar_takimlar1" FromRole="maclar" ToRole="takimlar" />
+    <NavigationProperty Name="hakem" Relationship="spordbModel.FK_maclar_hakem" FromRole="maclar" ToRole="hakem" />
+  </EntityType>
+  <Association Name="FK_maclar_salonlar">
+    <End Type="spordbModel.salonlar" Role="salonlar" Multiplicity="0..1" />
+    <End Type="spordbModel.maclar" Role="maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salonlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="salonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_takimlar">
+    <End Type="spordbModel.takimlar" Role="takimlar" Multiplicity="0..1" />
+    <End Type="spordbModel.maclar" Role="maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="takimlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="homeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_takimlar1">
+    <End Type="spordbModel.takimlar" Role="takimlar" Multiplicity="0..1" />
+    <End Type="spordbModel.maclar" Role="maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="takimlar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="awayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_maclar_hakem">
+    <End Type="spordbModel.hakem" Role="hakem" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="spordbModel.maclar" Role="maclar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hakem">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="maclar">
+        <PropertyRef Name="basHakemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
